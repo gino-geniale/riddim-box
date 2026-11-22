@@ -1,0 +1,4 @@
+# Netlify: statische Seite, kein Build nötig
+[build]
+  publish = "dist/web"
+  command = ""
