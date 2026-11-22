@@ -1,0 +1,268 @@
+<title>sparked Riddim Box</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Cormorant:ital,wght@1,500;1,600&display=swap">
+<style>
+/* Layout: ein Gerät. Hochformat auf Handy/Tablet, Querformat (zwei Spalten) ab 980 px. Die Seite drumherum bleibt zurückhaltend. */
+:root{
+  --page:#efefed; --ink:#1a1a1a; --muted:#6b6b69; --line:#dcdcd9;
+  --lila:#b47ede; --lila-d:#8f5fb8; --lila-l:#f3ebfa; --lime:#d2f700; --lime-d:#a9c400;
+  --sans:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --serif:"Cormorant",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--page:#151515;--ink:#ededeb;--muted:#9a9a97;--line:#2c2c2b;color-scheme:dark}}
+:root[data-theme="dark"]{--page:#151515;--ink:#ededeb;--muted:#9a9a97;--line:#2c2c2b;color-scheme:dark}
+html,body{background:var(--page);color:var(--ink)}
+body{font-family:var(--sans);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:24px 48px}
+.wrap{max-width:920px;margin:0 auto;display:flex;flex-direction:column;gap:22px;align-items:center}
+.intro{width:100%;max-width:920px;display:flex;flex-direction:column;gap:4px}
+.intro h1{margin:0;font-size:1.4rem;font-weight:600;letter-spacing:-.01em}
+.intro p{margin:0;color:var(--muted);line-height:1.5;max-width:64ch}
+.help{width:100%;max-width:920px;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px 32px;font-size:.86rem;line-height:1.5}
+.help h2{font-size:.95rem;margin:0 0 6px;font-weight:600}
+.help ul{margin:0;padding-left:1.1em;display:flex;flex-direction:column;gap:4px}
+.help .muted{color:var(--muted)}
+kbd{font:600 .72rem var(--sans);border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:0 5px}
+
+/* ---------- Gerät ---------- */
+.dev{
+  --body:#ffffff;--key:#f3f3f2;--key2:#ebebea;--fg:#1a1a1a;--label:#8a8a88;--rail:#e2e2e0;--ks:#d6d6d3;
+  background:var(--body);color:var(--fg);border-radius:28px;padding:22px;width:100%;max-width:460px;box-sizing:border-box;
+  box-shadow:0 0 0 1px #e6e6e4,0 22px 46px -24px rgba(26,26,26,.28);font-family:var(--sans);
+  user-select:none;-webkit-user-select:none;touch-action:manipulation;
+  display:grid;grid-template-columns:minmax(0,1fr);gap:16px;
+}
+.dev .col{display:flex;flex-direction:column;gap:16px;min-width:0}
+@media (min-width:980px){.dev{max-width:920px;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:30px;padding:26px 28px}.dev .head{grid-column:1/-1}}
+.dev .head{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.dev .brand{display:flex;align-items:baseline;gap:10px;min-width:0}
+.dev .brand img{height:22px;width:auto;display:block}
+.dev .brand span{font-size:.72rem;font-weight:600;color:var(--label);white-space:nowrap}
+.dev .hr{display:flex;align-items:center;gap:12px}
+.dev .mini{display:inline-flex;background:var(--key);border-radius:999px;padding:2px}
+.dev .mini button{font:700 .62rem var(--sans);border:0;background:transparent;color:var(--label);padding:4px 8px;border-radius:999px;cursor:pointer;text-transform:lowercase}
+.dev .mini button[aria-pressed="true"]{background:var(--fg);color:#fff}
+.dev .leds{display:flex;gap:6px}
+.dev .led{width:6px;height:6px;border-radius:50%;background:var(--rail);transition:background .25s,box-shadow .25s}
+.dev .led.on{background:var(--lila);box-shadow:0 0 6px var(--lila);transition:none}
+.dev .led.rec{background:#e5484d;box-shadow:0 0 6px #e5484d}
+.dev .grille{display:grid;grid-template-columns:repeat(14,1fr);gap:7px;padding:2px}
+.dev .grille i{aspect-ratio:1;border-radius:50%;background:#ececea;box-shadow:inset 0 1px 1.5px rgba(26,26,26,.18)}
+.dev .lcd{background:#f4f4f3;border:1px solid #ebebea;box-shadow:inset 0 1px 3px rgba(26,26,26,.12);border-radius:20px 20px 20px 4px;padding:14px 18px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;font-variant-numeric:tabular-nums}
+.dev .lcd .big{font-family:var(--serif);font-style:italic;font-weight:600;font-size:2rem;line-height:1.05;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dev .lcd .sub{grid-column:1;font-size:.72rem;font-weight:600;color:var(--label);min-height:1.1em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dev .lcd .sub.toast{color:var(--lila-d)}
+.dev .lcd .meta{grid-column:2;grid-row:1/3;font-size:.7rem;font-weight:600;color:#7a7a78;text-align:right;line-height:1.5;white-space:nowrap}
+.dev .lcd .bar{grid-column:1/-1;display:grid;grid-template-columns:repeat(16,1fr);gap:3px;margin-top:6px}
+.dev .lcd .bar i{height:4px;border-radius:1px;background:var(--fg);opacity:.13}
+.dev .lcd .bar i.hit{opacity:1;background:var(--lila)}
+.dev .lcd .bar i.now{background:var(--lime);opacity:1;box-shadow:0 0 0 1px var(--fg)}
+.dev .sec{display:flex;flex-direction:column;gap:8px;min-width:0}
+.dev .sech{display:flex;justify-content:space-between;align-items:center;gap:8px;min-height:24px}
+.dev .lbl{font-size:.72rem;font-weight:600;color:var(--label);text-transform:lowercase;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dev .tabs{display:flex;gap:4px;flex-wrap:wrap}
+.dev .tab{font:700 .7rem var(--sans);border:0;background:transparent;color:var(--label);padding:5px 9px;border-radius:999px;cursor:pointer;text-transform:lowercase}
+.dev .tab[aria-pressed="true"]{background:var(--lila);color:var(--fg)}
+.dev .tab:disabled{opacity:.35;cursor:default}
+.dev .tab:focus-visible,.dev .mini button:focus-visible{outline:2px solid var(--lila);outline-offset:1px}
+.dev .chips{display:grid;grid-template-columns:repeat(auto-fit,minmax(70px,1fr));gap:6px}
+.dev .sliders{display:grid;grid-template-columns:repeat(var(--cols,2),minmax(0,1fr));gap:8px 16px;min-height:112px;align-content:start}
+.dev .sl{display:flex;flex-direction:column;gap:2px;min-width:0}
+.dev .sl label{font-size:.7rem;font-weight:600;color:#5c5c5a;display:flex;justify-content:space-between;gap:6px;text-transform:lowercase;white-space:nowrap}
+.dev .sl label span{overflow:hidden;text-overflow:ellipsis}
+.dev .sl label b{font-weight:600;font-variant-numeric:tabular-nums;color:var(--label)}
+.dev .sl.muted label{text-decoration:line-through;color:var(--label)}
+.dev input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:30px;background:transparent;margin:0;cursor:pointer;touch-action:pan-y}
+.dev input[type=range]::-webkit-slider-runnable-track{height:4px;border-radius:2px;background:linear-gradient(to right,var(--lila) 0 var(--p,50%),var(--rail) var(--p,50%) 100%)}
+.dev input[type=range]::-moz-range-track{height:4px;border-radius:2px;background:var(--rail)}
+.dev input[type=range]::-moz-range-progress{height:4px;border-radius:2px;background:var(--lila)}
+.dev input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:14px;height:24px;border-radius:4px;background:#fff;border:1.5px solid var(--fg);margin-top:-10px;box-shadow:0 1px 2px rgba(0,0,0,.2)}
+.dev input[type=range]::-moz-range-thumb{width:14px;height:24px;border-radius:4px;background:#fff;border:1.5px solid var(--fg);box-shadow:0 1px 2px rgba(0,0,0,.2);box-sizing:border-box}
+.dev input[type=range]:focus-visible{outline:2px solid var(--lila);outline-offset:2px}
+.dev .k{font-family:inherit;font-size:.74rem;font-weight:600;border:0;cursor:pointer;background:var(--key);color:var(--fg);border-radius:9px;box-shadow:0 2px 0 var(--ks);transition:transform .06s,box-shadow .06s,background .12s;-webkit-tap-highlight-color:transparent;touch-action:manipulation;text-transform:lowercase;padding:10px 4px;line-height:1.1;position:relative}
+.dev .k.down,.dev .k.held{transform:translateY(2px);box-shadow:0 0 0 var(--ks)}
+.dev .k:focus-visible{outline:2px solid var(--lila);outline-offset:2px}
+.dev .k.sel{background:var(--lila);box-shadow:0 2px 0 var(--lila-d)}
+.dev .k:disabled{opacity:.4;cursor:default}
+.dev .pads{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.dev .pad{aspect-ratio:1/1;max-width:100%;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-size:.7rem;padding:4px;text-align:center}
+.dev .pad small{font-size:.56rem;font-weight:600;color:var(--label);text-transform:none}
+.dev .pad.sel small{color:#5a3a78}
+.dev .pad.note{background:var(--lila-l);text-transform:none;font-size:.9rem}
+.dev .pad.note.sel{background:var(--lila)}
+.dev .pad.flash{background:#e6d6f4;transition:none}
+.dev .pad.note.flash{background:var(--lila)}
+.dev .pad.muted{opacity:.45;text-decoration:line-through}
+.dev .pad .dotm{position:absolute;top:14%;width:5px;height:5px;border-radius:50%;background:var(--lila)}
+.dev .stepsec{position:relative}
+.dev .steps{display:grid;grid-template-columns:repeat(8,1fr);gap:6px}
+.dev .step{aspect-ratio:1/1.12;max-width:100%;border-radius:7px;background:var(--key2);padding:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:7px;gap:3px;font-size:.62rem;text-transform:none}
+.dev .step.q{background:#e3e3e1}
+.dev .step::before{content:"";width:7px;height:7px;border-radius:50%;background:#cfcfcc}
+.dev .step.on::before{background:var(--lila);width:9px;height:9px}
+.dev .step.on.acc::before{box-shadow:0 0 0 3px #e2cdf3}
+.dev .step.on.prob::before{background:transparent;box-shadow:inset 0 0 0 2px var(--lila)}
+.dev .step.on.tie::after{content:"";position:absolute;right:-6px;top:11px;width:6px;height:3px;background:var(--lila)}
+.dev .step.now{background:var(--lime);transition:none}
+.dev .step.now::before{background:var(--fg)}
+.dev .step .nt{font-weight:700;color:var(--fg);line-height:1}
+.dev .step .sl2{font-size:.55rem;color:var(--lila-d)}
+.dev .pager{display:flex;gap:4px;align-items:center}
+.dev .pats{display:grid;grid-template-columns:repeat(4,1fr) 1.3fr 1.1fr;gap:6px}
+.dev .pat{font-size:.85rem;text-transform:none}
+.dev .pat.queued{animation:blink .5s steps(2) infinite}
+.dev .pat.chain{box-shadow:0 2px 0 var(--lila-d),inset 0 0 0 2px var(--lila)}
+.dev .pat.has::after{content:"";position:absolute;right:6px;top:6px;width:4px;height:4px;border-radius:50%;background:var(--label)}
+@keyframes blink{50%{background:var(--lila)}}
+.dev .row4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.dev .fxk{padding:13px 4px;background:var(--key2)}
+.dev .fxk.held{background:var(--lime);box-shadow:0 0 0 var(--lime-d)}
+.dev .play{grid-column:span 2;padding:13px 6px;font-size:.84rem;font-weight:700;background:var(--lime);box-shadow:0 2px 0 var(--lime-d)}
+.dev .play.on{background:var(--lila);box-shadow:0 2px 0 var(--lila-d)}
+.dev .rec .dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#e5484d;margin-right:5px;vertical-align:1px}
+.dev .rec.on{background:#e5484d;color:#fff;box-shadow:0 2px 0 #b83236}
+.dev .rec.on .dot{background:#fff}
+.dev .util .k{background:transparent;box-shadow:inset 0 0 0 1.5px var(--key2);padding:9px 4px}
+.dev .util .k.down{box-shadow:inset 0 0 0 1.5px var(--lila);transform:none}
+.dev .hint{font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--lila-d);text-align:center;min-height:1.3em}
+.dev .hint a{color:inherit}
+/* Step-Editor */
+.dev [hidden]{display:none!important}
+.dev .edit{position:absolute;top:-6px;left:-6px;right:-6px;background:#fff;border-radius:16px;box-shadow:0 0 0 1px #e6e6e4,0 12px 30px -12px rgba(26,26,26,.35);padding:12px 14px;display:flex;flex-direction:column;gap:9px;z-index:5}
+.dev .edit .er{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.dev .edit .er .lbl{min-width:70px}
+.dev .edit .opts{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end}
+.dev .edit .k{padding:7px 10px;font-size:.72rem}
+.dev .edit .x{border:0;background:transparent;font:300 1.6rem/1 var(--sans);color:var(--fg);width:38px;height:38px;margin:-8px -8px -8px 0;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.dev .edit .x:hover{background:var(--key)}
+.dev .edit .x:focus-visible{outline:2px solid var(--lila)}
+.dev .step.on.thr::before{box-shadow:0 0 0 2px #f4f4f3,0 0 0 3.5px var(--lila)}
+.dev .lcd .tempo{grid-column:1;grid-row:1/3;display:flex;align-items:center;gap:10px;min-width:0}
+.dev .lcd .tb{width:40px;height:40px;padding:0;font-size:1.2rem;border-radius:50%;flex:none;background:#fff}
+.dev .lcd .tv{font-family:var(--serif);font-style:italic;font-weight:600;font-size:2.3rem;line-height:1;min-width:1.9em;text-align:center;cursor:ns-resize;touch-action:none;border-radius:8px}
+.dev .lcd .tv:focus-visible{outline:2px solid var(--lila)}
+.dev .lcd .tu{font-size:.72rem;font-weight:600;color:var(--label)}
+.dev .lcd .bpmb{font:inherit;color:var(--fg);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px}
+.dev .lcd .bpmb[aria-expanded="true"]{color:var(--lila-d)}
+.dev .lcd .bpmb:focus-visible{outline:2px solid var(--lila);outline-offset:2px}
+.dev .padsec{position:relative}
+.dev .picker{top:26px;bottom:auto}
+.dev .pgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.dev .pgrid2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.dev .pgrid3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.dev .picker .k{padding:10px 4px;text-transform:none}
+.dev .pick{font:inherit;color:var(--fg);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline dotted;text-underline-offset:3px;text-transform:none}
+.dev .pick[aria-expanded="true"]{color:var(--lila-d)}
+.dev .pick:focus-visible{outline:2px solid var(--lila);outline-offset:2px}
+.dev .edit h3{margin:0;font-size:.82rem;font-weight:700}
+@media (max-width:420px){.dev{padding:16px;gap:14px;border-radius:24px}.dev .col{gap:14px}.dev .pad{font-size:.62rem}.dev .lcd .big{font-size:1.7rem}.dev .k{font-size:.7rem}}
+@media (prefers-reduced-motion:reduce){.dev .k,.dev .led{transition:none}.dev .pat.queued{animation:none;background:var(--lila-l)}}
+</style>
+
+<div class="wrap">
+  <div class="intro">
+    <h1>Riddim Box</h1>
+    <p>Drück auf <b>play</b>: Ein Beat ist schon geladen. Dann tipp auf die Pads, setz Steps und halte die Effekte.</p>
+  </div>
+
+  <div class="dev" id="dev">
+    <div class="head">
+      <div class="brand"><img alt="sparked" src="__LOGOB__"><span>riddim box</span></div>
+      <div class="hr">
+        <div class="mini" role="group" aria-label="Beschriftung"><button type="button" id="lang-pro" aria-pressed="true">pro</button><button type="button" id="lang-easy" aria-pressed="false">easy</button></div>
+        <div class="leds" aria-hidden="true"><span class="led"></span><span class="led"></span><span class="led"></span><span class="led"></span></div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="grille" aria-hidden="true" id="grille"></div>
+      <div class="lcd">
+        <div class="big" id="lcd-big">roots</div>
+        <div class="sub" id="lcd-sub" aria-live="polite"></div>
+        <div class="tempo" id="tempo" hidden></div>
+        <div class="meta" id="lcd-meta"></div>
+        <div class="bar" id="lcd-bar"></div>
+      </div>
+      <div class="sec">
+        <div class="sech"><div class="tabs" id="views"></div></div>
+        <div class="sliders" id="sliders"></div>
+      </div>
+      <div class="sec padsec">
+        <div class="sech"><span class="lbl" id="pads-lbl"></span><div class="tabs" id="modes"></div></div>
+        <div class="pads" id="pads"></div>
+        <div class="edit picker" id="picker" hidden></div>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="sec">
+        <div class="sech"><span class="lbl" id="kit-lbl"></span><div class="tabs" id="genres"></div></div>
+        <div class="chips" id="kits"></div>
+      </div>
+      <div class="sec stepsec" id="stepsec">
+        <div class="sech"><span class="lbl" id="steps-lbl"></span><div class="pager" id="pager"></div></div>
+        <div class="steps" id="steps"></div>
+        <div class="edit" id="edit" hidden></div>
+      </div>
+      <div class="sec">
+        <div class="sech"><span class="lbl" id="pats-lbl"></span></div>
+        <div class="pats" id="pats"></div>
+      </div>
+      <div class="sec">
+        <div class="sech"><span class="lbl" id="fx-lbl"></span></div>
+        <div class="row4" id="fx"></div>
+      </div>
+      <div class="row4">
+        <button type="button" class="k rec" id="b-rec"></button>
+        <button type="button" class="k" id="b-tap"></button>
+        <button type="button" class="k play" id="b-play"></button>
+      </div>
+      <div class="row4 util">
+        <button type="button" class="k" id="b-demo"></button>
+        <button type="button" class="k" id="b-clear"></button>
+        <button type="button" class="k" id="b-undo"></button>
+        <button type="button" class="k" id="b-share"></button>
+      </div>
+      <div class="hint" id="hint"></div>
+    </div>
+  </div>
+
+  <div class="help">
+    <section>
+      <h2>So geht's</h2>
+      <ul>
+        <li>Pad antippen wählt die Spur. Dann die Steps antippen.</li>
+        <li><b>bass</b> oder <b>skank</b> wählen: Die Pads werden Töne bzw. Akkorde. Ton tippen, dann Steps setzen.</li>
+        <li>Step <b>gedrückt halten</b>: Akzent, Anschlag (Roll, doppelt, versetzt, gestrummt), Echo-Wurf, Länge und Slide.</li>
+        <li><b>bpm</b> im Display antippen: Tempo mit −/+ oder durch Ziehen ändern.</li>
+        <li><b>mix</b>: Lautstärke pro Spur, Pad antippen schaltet stumm.</li>
+        <li>Tonart: im <b>bass</b>- oder <b>skank</b>-Modus auf "A minor ▾" tippen. Der Beat wandert mit.</li>
+        <li>Modus <b>fx</b>: Die Pads werden 8 Effekte zum Live-Spielen (siren, air horn, laser, dub bomb, spring, riser, rewind, whistle). Halten = klingt.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Patterns</h2>
+      <ul>
+        <li>A–D wechseln am Taktende, damit du im Groove bleibst.</li>
+        <li>Zwei Pattern-Tasten gleichzeitig oder <kbd>Shift</kbd> + Klick: Kette, z. B. A → B → A.</li>
+        <li><b>copy</b>, dann Ziel antippen: Pattern kopieren.</li>
+        <li><b>clear</b> löscht die Spur, gedrückt halten das ganze Pattern.</li>
+      </ul>
+    </section>
+    <section>
+      <h2>Tastatur</h2>
+      <ul class="muted">
+        <li><kbd>Leertaste</kbd> play · <kbd>1</kbd>–<kbd>8</kbd> Pads · <kbd>←</kbd><kbd>→</kbd> Kit</li>
+        <li><kbd>E</kbd> echo · <kbd>H</kbd> hall · <kbd>F</kbd> filter · <kbd>S</kbd> stutter (halten)</li>
+        <li><kbd>R</kbd> rec · <kbd>T</kbd> tap · <kbd>Z</kbd> undo · <kbd>Shift</kbd>+<kbd>1</kbd>–<kbd>4</kbd> Pattern</li>
+      </ul>
+    </section>
+  </div>
+</div>
+
+<script>
+__ENGINE__
+</script>
+<script>
+__APP__
+</script>
